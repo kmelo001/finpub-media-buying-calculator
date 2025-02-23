@@ -100,6 +100,21 @@ const MediaForecast = () => {
     setDerivedMetrics(newMetrics);
   }, [campaignDuration, totalAdSpend, cpm, adCtr, vslToOfCtr, orderFormConversion, aov]);
 
+  // Define metric display names
+  const metricDisplayNames: { [key: string]: string } = {
+    adCtr: 'Ad CTR',
+    vslToOfCtr: 'VSL to Order Form CTR',
+    orderFormConversion: 'Order Form Conversion',
+    aov: 'Average Order Value',
+    clicksToVsl: 'Clicks to VSL',
+    costPerClick: 'Cost Per Click',
+    clicksToOrder: 'Clicks to Order',
+    grossOrders: 'Gross Orders',
+    grossRevenue: 'Gross Revenue',
+    roas: 'ROAS',
+    promoConversionRate: 'Promo Conversion Rate'
+  };
+
   // Define metric relationships
   const metricImpacts: { [key: string]: string[] } = {
     adCtr: ['clicksToVsl', 'costPerClick', 'clicksToOrder', 'grossOrders', 'grossRevenue', 'roas', 'promoConversionRate'],
@@ -124,12 +139,12 @@ const MediaForecast = () => {
   // New component to show metric relationships
   const MetricRelationship = ({ sourceMetric, targetMetrics }: { sourceMetric: string, targetMetrics: string[] }) => (
     <div className="flex items-center space-x-2 text-sm text-gray-500 mt-2">
-      <span className="font-medium text-blue-600">{sourceMetric}</span>
+      <span className="font-medium text-blue-600">{metricDisplayNames[sourceMetric]}</span>
       <ArrowRight size={12} className="text-gray-400" />
       <span>affects:</span>
       {targetMetrics.map((metric, index) => (
         <React.Fragment key={metric}>
-          <span className="font-medium">{metric}</span>
+          <span className="font-medium">{metricDisplayNames[metric]}</span>
           {index < targetMetrics.length - 1 && <ArrowRight size={12} className="text-gray-400" />}
         </React.Fragment>
       ))}

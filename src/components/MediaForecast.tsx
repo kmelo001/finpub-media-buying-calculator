@@ -98,7 +98,7 @@ const MediaForecast = () => {
     const newMetrics = calculateMetrics();
     setPreviousMetrics(derivedMetrics);
     setDerivedMetrics(newMetrics);
-  }, [campaignDuration, totalAdSpend, cpm, adCtr, vslToOfCtr, orderFormConversion, aov, derivedMetrics]);
+  }, [campaignDuration, totalAdSpend, cpm, adCtr, vslToOfCtr, orderFormConversion, aov]);
 
   // Define metric relationships
   const metricImpacts: { [key: string]: string[] } = {

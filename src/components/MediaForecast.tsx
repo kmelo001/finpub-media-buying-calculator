@@ -98,7 +98,7 @@ const MediaForecast = () => {
     const newMetrics = calculateMetrics();
     setPreviousMetrics(derivedMetrics);
     setDerivedMetrics(newMetrics);
-  }, [campaignDuration, totalAdSpend, cpm, adCtr, vslToOfCtr, orderFormConversion, aov]);
+  }, [campaignDuration, totalAdSpend, cpm, adCtr, vslToOfCtr, orderFormConversion, aov, derivedMetrics]);
 
   // Define metric relationships
   const metricImpacts: { [key: string]: string[] } = {
@@ -122,7 +122,7 @@ const MediaForecast = () => {
   };
 
   // New component to show metric relationships
-  const MetricRelationship = ({ sourceMetric, targetMetrics }: { sourceMetric: string, targetMetrics: string[] }) => (
+  const MetricRelationship = ({ targetMetrics }: { targetMetrics: string[] }) => (
     <div className="flex items-center space-x-2 text-sm text-gray-500 mt-2">
       <span>Impacts:</span>
       {targetMetrics.map((metric, index) => (
@@ -165,9 +165,8 @@ const MediaForecast = () => {
             <p className="text-sm text-gray-500 mt-1">{helpText}</p>
           )}
           {metricKey && metricImpacts[metricKey] && (
-            <MetricRelationship 
-              sourceMetric={metricKey} 
-              targetMetrics={metricImpacts[metricKey]} 
+            <MetricRelationship
+              targetMetrics={metricImpacts[metricKey]}
             />
           )}
         </div>
